@@ -117,3 +117,592 @@ int main()
     } while (ch != 4);
     return 0;
 }
+
+----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+//constructor overloding
+
+#include<iostream>
+
+using namespace std;
+
+class a
+{
+    public:
+
+        a()
+        {
+            cout<<"\n FIRST CONSTRUCTOR:";
+        }
+        a(int i)
+        {
+            cout<<"\n VALUE OF i: "<<i;
+        }
+        a(int i, int j)
+        {
+            cout<<"\n VALUE OF i: "<<i<<" AND j: "<<j;
+        }
+};
+
+int main()
+{
+    a a1;
+    a a2(10);
+    a a3(20,30);
+
+    return 0;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+friend function
+
+#include<iostream>
+
+using namespace std;
+
+class box
+{
+    private:
+
+        int width;
+
+    public:
+
+        friend void printwidth(box b);              //PASS THE OBJECT IN FRIEND
+
+        void setwidth(int wid);
+};
+
+//MEMBER FUNCTION DEFINITION
+
+void box::setwidth(int wid)
+{
+    width=wid;      //10
+}
+
+//NOTE:PRINT WIDTH() IS NOT A MEMBER FUNCTION OF ANY CLASS
+
+void printwidth(box b)
+{
+    cout<<"\n WIDTH OF BOX: "<<b.width;
+}
+
+int main()
+{
+    box b;
+
+    b.setwidth(10);
+
+    printwidth(b);
+
+    return 0;
+}
+
+---------_______________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+
+//function overloding
+
+//POLYMORPHISM
+//COMPILE TIME
+//FUNCTION OVERLOADING
+
+#include<iostream>
+
+using namespace std;
+
+class demo
+{
+
+    public:
+
+            void disp()
+            {
+                cout<<"\n FIRST:";
+            }
+            void disp(int i)
+            {
+                cout<<"\n VALUE OF i:"<<i;
+            }
+            void disp(int i,int j)
+            {
+                cout<<"\n VALUE OF i:"<<i<<"and j"<<j;
+            }
+};
+
+int main()
+{
+   demo d;
+
+   d.disp();
+   d.disp(10);
+   d.disp(10,20);
+
+}
+___________________________________________________________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________________________________________________
+//function overriding
+//POLYMORPHISM
+//RUN TIME POLYMORPHISM
+//FUNCTION OVERRIDING
+
+#include<iostream>
+
+using namespace std;
+
+class A
+{
+    public:
+
+        int b;
+        void show()
+        {
+            cout<<"\n BASE CLASS:"<<b;
+        }
+};
+
+class B:public A
+{
+    public:
+
+        int d;
+        void show()
+        {
+            cout<<"\n BASE CLASS: "<<b;
+            cout<<"\n CHILD CLASS: "<<d;
+        }
+};
+
+int main()
+{
+    B b2;               //OBJECT
+
+    B*p;                //POINTER
+
+    p=&b2;              //STORE ADDRESS OF OBJECT
+
+    p-> b=10;           //ASSIGN VALUE OF BASE CLASS
+
+    p-> d=20;           //ASSIGN VALUE OF CHILD CLASS
+
+    p-> show();         //CALL THE FUNCTION  
+
+    return 0;  
+}
+_____________________________________________________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
+//hierachical inheritance
+
+#include <iostream>
+using namespace std;
+class X
+{
+public:
+    int a, b;
+    void getdata()
+    {
+        cout << "\nEnter value of a and b:\n";
+        cin >> a >> b;
+    }
+};
+class Y : public X
+{
+public:
+    void product()
+    {
+        cout << "\nProduct= " << a * b;
+    }
+};
+class Z : public X
+{
+public:
+    void sum()
+    {
+        cout << "\nSum= " << a + b;
+    }
+};
+int main()
+{
+    Y obj1;
+    Z obj2;
+    obj1.getdata();
+    obj1.product();
+    obj2.getdata();
+    obj2.sum();
+    return 0;
+}
+_______________________________________________________________________________________________________________________________________
+
+//multilevel inheritance
+
+#include <iostream>
+using namespace std;
+
+class A {
+    public:
+      void display() {
+          cout<<"Base class content.";
+      }
+};
+
+class B : public A {};
+
+class C : public B {};
+
+int main() {
+    C obj;
+    obj.display();
+    return 0;
+}
+
+__________________________________________________________________________________________________________________________________________________________
+//multiple inheritance
+
+#include <iostream>
+using namespace std;
+
+class Mammal {
+  public:
+    Mammal() {
+      cout << "Mammals can give direct birth." << endl;
+    }
+};
+
+class WingedAnimal {
+  public:
+    WingedAnimal() {
+      cout << "Winged animal can flap." << endl;
+    }
+};
+
+class Bat: public Mammal, public WingedAnimal {};
+
+int main() {
+    Bat b1;
+    return 0;
+}
+____________________________________________________________________________________________________________________________________________
+//queue
+
+/*
+ * C Program to Implement a Queue using an Array
+ */
+#include <stdio.h>
+ 
+#define MAX 50
+ 
+void insert();
+void delete();
+void display();
+int queue_array[MAX];
+int rear = - 1;
+int front = - 1;
+main()
+{
+    int choice;
+    while (1)
+    {
+        printf("1.Insert element to queue \n");
+        printf("2.Delete element from queue \n");
+        printf("3.Display all elements of queue \n");
+        printf("4.Quit \n");
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+            case 1:
+            insert();
+            break;
+            case 2:
+            delete();
+            break;
+            case 3:
+            display();
+            break;
+            case 4:
+            exit(1);
+            default:
+            printf("Wrong choice \n");
+        } /* End of switch */
+    } /* End of while */
+} /* End of main() */
+ 
+void insert()
+{
+    int add_item;
+    if (rear == MAX - 1)
+    printf("Queue Overflow \n");
+    else
+    {
+        if (front == - 1)
+        /*If queue is initially empty */
+        front = 0;
+        printf("Inset the element in queue : ");
+        scanf("%d", &add_item);
+        rear = rear + 1;
+        queue_array[rear] = add_item;
+    }
+} /* End of insert() */
+ 
+void delete()
+{
+    if (front == - 1 || front > rear)
+    {
+        printf("Queue Underflow \n");
+        return ;
+    }
+    else
+    {
+        printf("Element deleted from queue is : %d\n", queue_array[front]);
+        front = front + 1;
+    }
+} /* End of delete() */
+ 
+void display()
+{
+    int i;
+    if (front == - 1)
+        printf("Queue is empty \n");
+    else
+    {
+        printf("Queue is : \n");
+        for (i = front; i <= rear; i++)
+            printf("%d ", queue_array[i]);
+        printf("\n");
+    }
+} /* End of display() */
+
+//recursion
+
+#include <stdio.h>
+
+unsigned long long int factorial(unsigned int i) {
+
+   if(i <= 1) {
+      return 1;
+   }
+   return i * factorial(i - 1);
+}
+
+int  main() {
+   int i = 12;
+   printf("Factorial of %d is %d\n", i, factorial(i));
+   return 0;
+}
+
+//scope resolution
+#include <iostream>  
+using namespace std;  
+class Operate  
+{  
+public:  
+    // declaration of the member function  
+    void fun();  
+};  
+// define the member function outside the class.  
+void Operate::fun()   /* return_type Class_Name::function_name */  
+{  
+cout << " It is the member function of the class. ";  
+}  
+int main ()  
+{  
+ // create an object of the class Operate  
+Operate op;  
+op.fun();  
+return 0;  
+}  
+-____________________________________________________________________________________________________________________________________________
+//stack
+
+#include <stdio.h>
+#define n 5
+int top = -1;
+int s[n];
+
+// FUNCTION DECLARATION
+
+void push(int data);
+int pop();
+int peep();
+int change();
+
+void main()
+{
+    int data, choice, cont = 1, i;
+
+    while (cont == 1)
+    {
+        printf("\n1.PUSH INTO STACK.\n");
+        printf("\n2.POP FROM STACK.\n");
+        printf("\n3.PEEP INTO STACK.\n");
+        printf("\n4.CHANGE INTO STACK.\n");
+        printf("\n5.DISPLAY.\n");
+        printf("\nENETR YOUR CHOICE.\n");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+
+            printf("\nENTER THE VALUE OF ITEM:");
+            scanf("%d", &data);
+            push(data);
+            break;
+
+        case 2:
+
+            data = pop();
+            if (data != NULL)
+            {
+                printf("\nITEM POOPED OUT:%d\n", data);
+            }
+            break;
+
+        case 3:
+
+            data = peep();
+            if (data != NULL)
+            {
+                printf("\nITEM AT TOP OF STACK:%d", data);
+            }
+            break;
+
+        case 4:
+
+            data = change();
+            if (data != NULL)
+            {
+                printf("\nITEM CHANGED");
+            }
+            break;
+
+        case 5:
+
+            for (i = top; i >= 0; i--)
+            {
+                printf("\n%d", s[i]);
+            }
+            break;
+
+        default:
+
+            printf("\nINVALID CHOICE\n");
+            break;
+        }
+
+        printf("\nDO YOU WANT TO CONTINUE (1/0).");
+        scanf("%d", &cont);
+    }
+}
+
+// FUNCTION FOR PUSH OPERATION
+
+void push(int data)
+{
+    if (top == n - 1)
+    {
+        printf("\nSTACK OVERFLOW.PUSH NOT POSSIBLE.\n");
+    }
+    else
+    {
+        top = top + 1;
+        s[top] = data;
+    }
+    return;
+}
+
+// FUNCTION FOR POP OPERATION
+
+int pop()
+{
+    int data = NULL;
+
+    if (top == -1)
+    {
+        printf("\nSTACK UNDERFLOW.POP NOT POSSIBLE.\n");
+    }
+    else
+    {
+        data = s[top];
+        top = top - 1;
+    }
+    return (data);
+}
+
+// FUNCTION FOR PEEP OPERATION
+
+int peep()
+{
+    int data = NULL;
+    int i;
+
+    if (top - i + 1 == -1)
+    {
+        printf("\nSTACK UNDERFLOW.NO ELEMENT IN STACK.");
+    }
+    else
+    {
+        printf("\nENTER THE VALUE:");
+    }
+    return (s[top - i + 1]);
+}
+
+// FUNCTION FOR CHANGE OPERATION
+
+int change()
+{
+    int data = NULL;
+    int i, x;
+
+    if (top - i + 1 <= -1)
+    {
+        printf("\nSTACK UNDERFLOW.NO ELEMENT IN STACK.\n");
+    }
+    else
+    {
+        printf("\nENTER THE INDEX VALUE:");
+        scanf("%d", &i);
+
+        printf("\nENTER THE NEW VALUE:");
+        scanf("%d", &x);
+
+        s[top - i + 1] = x;
+    }
+    return (x);
+}
+_____________________________________________________________________________________________________________________________________
+//virtual function
+#include<iostream>
+
+using namespace std;
+
+class base
+{
+    public:
+
+        virtual void show()
+        {
+            cout<<"IN BASE\n";
+        }
+};
+
+class derived : public base
+{
+    public:
+
+        void show()
+        {
+            cout<<"IN DERIVED\n";
+        }
+};
+
+int main()
+{
+    base * bp = new derived;
+
+    bp->show();
+
+    return 0;
+}
