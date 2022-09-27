@@ -706,3 +706,92 @@ int main()
 
     return 0;
 }
+_________________________________________________________________________________________________________________________________________________
+
+//abstraction
+#include <iostream>
+using namespace std;
+
+class A
+{
+    private:
+        int a = 10;
+
+    public:
+        void show()
+        {
+        cout << a;
+        }
+};
+
+int main()
+{
+    A ob;
+    ob.show();
+}
+______________________________________________________________________________________________________________________________________________
+//destruction
+#include<iostream>
+using namespace std;
+ 
+class Test
+{
+   public:
+        Test()
+       {
+              cout<<"\n Constructor executed";
+       }   
+ 
+       ~Test()
+          {
+              cout<<"\n Destructor executed";
+          }
+};
+main()
+{
+     Test t;
+       
+    return 0;
+}
+_____________________________________________________________________________________________________________
+//encapsulation
+// c++ program to explain
+// Encapsulation
+
+#include<iostream>
+using namespace std;
+
+class Encapsulation
+{
+	private:
+		// data hidden from outside world
+		int x;
+		
+	public:
+		// function to set value of
+		// variable x
+		void set(int a)
+		{
+			x =a;
+		}
+		
+		// function to return value of
+		// variable x
+		int get()
+		{
+			return x;
+		}
+};
+
+// main function
+int main()
+{
+	Encapsulation obj;
+	
+	obj.set(5);
+	
+	cout<<obj.get();
+	return 0;
+}
+________________________________________________________________________________________________________________________________
+
